@@ -13,7 +13,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/api/users")
-    public ResponseEntity<List<User>> getallUsers(){
+    public ResponseEntity<List<User>> getAllUsers(){
         return ResponseEntity.ok(userService.getAllUsers());
     }
 
