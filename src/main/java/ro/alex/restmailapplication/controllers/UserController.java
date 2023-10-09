@@ -5,18 +5,25 @@ import org.springframework.web.bind.annotation.*;
 import ro.alex.restmailapplication.models.User;
 import ro.alex.restmailapplication.services.UserService;
 
+import java.util.List;
+
 @RestController
 public class UserController {
 
     private UserService userService;
 
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getallUsers(){
+        return ResponseEntity.ok(userService.getAllUsers());
+    }
+
     @PostMapping("/register")
-    public ResponseEntity<?> registerUser(@RequestBody User user){
-        return userService.saveUser(user);
+    public ResponseEntity<Object> registerUser(@RequestBody User user){
+        return ResponseEntity.ok(userService.saveUser(user));
     }
 
     @RequestMapping(value = "/confirm-account", method = {RequestMethod.GET,RequestMethod.POST})
-    public ResponseEntity<?> confirmUserAccount(@RequestParam("token") String confirmation){
+    public ResponseEntity<String> confirmUserAccount(@RequestParam("token") String confirmation){
         return userService.confirmEmail(confirmation);
     }
 

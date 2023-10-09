@@ -1,5 +1,6 @@
 package ro.alex.restmailapplication.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Service;
@@ -8,13 +9,20 @@ import ro.alex.restmailapplication.models.User;
 import ro.alex.restmailapplication.repository.ConfirmationTokenRepository;
 import ro.alex.restmailapplication.repository.UserRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService{
 
+    private final List<User> userList = new ArrayList<>();
+    @Autowired
     private UserRepository userRepository;
 
+    @Autowired
     ConfirmationTokenRepository confirmationTokenRepository;
 
+    @Autowired
     EmailService emailService;
 
 
@@ -54,6 +62,12 @@ public class UserServiceImpl implements UserService{
             return ResponseEntity.ok("Email verified successfully!");
         }
         return ResponseEntity.badRequest().body("Error: Couldn't verify email");
+    }
+
+
+    @Override
+    public List<User> getAllUsers(){
+        return userList;
     }
 
 }
