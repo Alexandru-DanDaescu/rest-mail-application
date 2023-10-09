@@ -19,7 +19,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<Object> registerUser(@RequestBody User user){
-        return ResponseEntity.ok(userService.saveUser(user));
+        return userService.saveUser(user);
     }
 
     @RequestMapping(value = "/confirm-account", method = {RequestMethod.GET,RequestMethod.POST})
