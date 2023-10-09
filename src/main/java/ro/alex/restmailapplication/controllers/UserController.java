@@ -12,7 +12,7 @@ public class UserController {
 
     private UserService userService;
 
-    @GetMapping("/users")
+    @GetMapping("/api/users")
     public ResponseEntity<List<User>> getallUsers(){
         return ResponseEntity.ok(userService.getAllUsers());
     }
